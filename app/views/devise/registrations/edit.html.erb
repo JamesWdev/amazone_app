@@ -1,0 +1,86 @@
+<div class="nav-wrap">
+  <nav class="nav-container">   
+    <%= link_to request.referrer , id: "login-page" do%>
+      <%= image_tag "icon.png", class: "icon" %>
+    <% end %>
+    <%@carts_count = Cart.all.count %>
+    <ul class="top-navigation">
+      <li class="top-li"><%= link_to "Back", :back, class: "top-link" %></li>
+      <% if account_signed_in? %>
+        <li class="top-li"> <%=link_to "Cart (#{@carts_count})", "/carts/cart", class: "top-link" %> </li>
+        <li class="top-li"> <%=link_to "Orders", "/carts/cart#orders", class: "top-link" %> </li>
+        <li class="top-li"><a class="top-link" href="#contact">Contact</a></li>       
+        <li class="top-li"> <%=link_to "Sign out", destroy_account_session_path, method: :delete, class: "top-link" %> </li>  
+      <% else %>
+        <li class="top-li"> <%=link_to "Sign up", new_account_registration_path, class: "top-link" %> </li>
+        <li class="top-li"> <%=link_to "Sign in", new_account_session_path, class: "top-link" %> </li>
+        <li class="top-li"><a class="top-link" href="#contact">Contact</a></li> 
+      <% end %>    
+   </ul>
+  </nav>
+</div>
+
+
+<main>
+  <header class="devise-header edit-devise">    
+    
+    <div class="login-wrap"> 
+      <h2 class="edit-title">Edit <%= resource_name.to_s.humanize %></h2> 
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <div class="field">
+          <%= f.label :email, "Account Email:" %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+
+        <div class="field">
+          <%= f.label :password, "Change Password:" %>
+          <%= f.password_field :password, autocomplete: "new-password", class: "edit-pwd", placeholder: "Create new password..." %>
+          <% if @minimum_password_length %>
+            <br />
+            <em class="chr-limit"><%= @minimum_password_length %> characters minimum</em>
+          <% end %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password_confirmation, "New Password Confirmation:" %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm new password..." %>
+        </div>
+
+        <div class="field">
+          <%= f.label :current_password, "Current Password:" %> 
+          <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "Confirm existing password..." %>
+        </div>
+        
+        <div class="actions">
+          <%= f.submit "Update Account", class: "add-to-cart", id: "update-btn" %>
+        </div>
+      <% end %>
+      <div class="del-account-wrap">
+        <%= button_to "Delete My Account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "del-account-btn" %>
+      </div>
+
+      <%# link_to "Back", :back %>
+    </div>
+  </header>
+
+
+
+  <section id="contact" class="sign-ip-contact item-contact" id="login-spacer" >
+    <h2>Contact</h2>
+    <p class="contactsummary">Want to buy something online for the first time in history? Just reach out!</p>
+    
+    <address>
+        <p class="phone">Phone:    <b>+1 (555) 111-5151</b></p>
+        <p class="email">Email:   <b>AmazoneIsLegit@mysite.com</b></p>
+    </address>
+  </section>
+
+</main>
+
+<%= render "carts/footer" %>

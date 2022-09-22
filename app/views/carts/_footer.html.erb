@@ -1,0 +1,17 @@
+<footer>
+  <div class="footer-wrap">
+    <h3> <%=link_to "Amazone", root_path %> </h3>
+    <Ul class="footer-container">
+        <% if account_signed_in? %>
+          <li class="fl"> <%=link_to "Sign out", destroy_account_session_path, method: :delete, class: "footer-link" %> </li>  
+        <% else %>
+          <li class="fl"> <%=link_to "Sign in", new_account_session_path, class: "footer-link" %> </li>
+        <% end %>
+        <li class="fl mobile-only"><a class="footer-link" href="#">Back To Top</a></li>       
+        <li class="fl non-mobile"><%=link_to "Cart", "/carts/cart", class: "footer-link" %></li>
+        <li class="fl non-mobile"><%=link_to "Orders", "/carts/cart#orders", class: "footer-link" %></li>
+        <li class="fl non-mobile"><a class="footer-link" href="#contact">Contact</a></li>        
+    </Ul>  
+  </div>
+  <p class="copyright"><em>&copy; Amazone</em></p>
+</footer>  

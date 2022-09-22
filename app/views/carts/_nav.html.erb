@@ -1,0 +1,27 @@
+<div class="nav-wrap">
+  <nav class="nav-container">   
+    <%= link_to root_path , id: "home-page" do%>
+      <%= image_tag "icon.png", class: "icon" %>
+    <% end %>
+
+     <%@carts_count = Cart.all.count %>
+
+    <ul class="top-navigation">              
+   
+      <li class="top-li"> <%=link_to "Cart (#{@carts_count})", "/carts/cart", class: "top-link" %> </li>
+      <li class="top-li"> <%=link_to "Orders", "/carts/cart#orders", class: "top-link" %> </li>
+      <li class="top-li"><a class="top-link" href="#contact">Contact</a></li>
+
+
+      <% if account_signed_in? %>
+        <li class="top-li"> <%=link_to "Edit Profile", edit_account_registration_path, class: "top-link" %> </li>    
+        <li class="top-li"> <%=link_to "Sign out", destroy_account_session_path, method: :delete, class: "top-link" %> </li>  
+      <% else %>
+        <li class="top-li"> <%=link_to "Sign up", new_account_registration_path, class: "top-link" %> </li>
+        <li class="top-li"> <%=link_to "Sign in", new_account_session_path, class: "top-link" %> </li>
+      <% end %>
+
+
+   </ul>
+  </nav>
+</div>

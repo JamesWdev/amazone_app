@@ -1,0 +1,84 @@
+<%= render "nav" %>
+
+<main>
+  <header>
+    <h1>Welcome to Amazone</h1>
+    <p>A Totally Original Idea</p>
+    <div class="search-container">
+      <input id="search" type="text" placeholder="Search...">
+      <%= image_tag("mag.png", class: "search-icon", alt: "seach icon") %>
+    </div>    
+  </header>
+
+  <section class="col-container">
+
+    <%= link_to food_path, class: "col" do %>
+      <h2>Food</h2>
+      <%= image_tag("pasta.jpg", alt: "Picture eggs,pasta, and flour.") %>
+      <p>Amazone Fresh!</p> 
+    <% end %>
+
+    <%= link_to tech_path, class: "col" do %>
+      <h2>Tech</h2>
+      <%= image_tag("tech3.jpg", alt: "Picture of laptop.") %>
+      <p>New Tech Everyday!</p> 
+    <% end %>
+
+    <%= link_to games_path, class: "col" do %>
+      <h2>Games</h2>
+      <%= image_tag("joystick.jpg", alt: "Logo of a game controller.") %>
+      <p>Best Games You Can buy!</p> 
+    <% end %>    
+
+    <%= link_to outdoors_path, class: "col" do %>
+      <h2>Outdoors</h2>
+      <%= image_tag("fish.jpg", alt: "Picture fishing rod over lake.") %>
+      <P>Explore With Amazone Store!</P> 
+    <% end %>
+
+    <%= link_to fashion_path, class: "col" do %>
+      <h2>Fashion</h2>
+        <%= image_tag("fashion.jpg", alt: "Picture of man in suit.") %>
+      <p>Stay Rad With These Fads!</p>
+    <% end %>
+
+    <%= link_to gear_path, class: "col" do %>
+      <h2>Athletic Gear</h2>
+      <%= image_tag("weights.jpg", alt: "Picture of weights.") %>
+      <p>Be Amazone fit!</p> 
+    <% end %>        
+
+    <%= link_to pets_path, class: "col" do %>
+      <h2>Pet Supply</h2>
+      <%= image_tag("dog.jpg", alt: "Picture of dog.") %>
+      <p>Latest Deals!</p> 
+    <% end %>    
+
+    <%= link_to movies_path, class: "col" do %>
+      <h2>Movies</h2>      
+      <%= image_tag("cinema.jpg", alt: "Picture of film.") %>
+      <P>Featuring Amazone Hits!</P>  
+    <% end %>
+  </section>
+    
+  <button type="submit" value="signup">Subscribe</button>
+
+  <section >    
+    <h2>FAQ</h2>       
+    <a href="#" id="qa">Click Here</a>
+  </section>
+
+  <hr>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p class="contactsummary">Want to buy something online for the first time in history? Just reach out!</p> 
+       
+    <address>
+        <p class="phone">Phone:    <b>+1 (555) 111-5151</b></p>
+        <p class="email">Email:   <b>AmazoneIsLegit@mysite.com</b></p>
+    </address>
+  </section>
+</main>
+
+<%= render "footer" %>

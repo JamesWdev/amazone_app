@@ -1,0 +1,74 @@
+<div class="nav-wrap">
+  <nav class="nav-container">   
+    <%= link_to request.referrer , id: "login-page" do%>
+      <%= image_tag "icon.png", class: "icon" %>
+    <% end %>
+    <%@carts_count = Cart.all.count %>
+    <ul class="top-navigation" id="login-nav">
+      <li class="top-li"><a class="top-link" href="#contact">Contact</a></li> 
+      <% if account_signed_in? %>
+        <li class="top-li"> <%=link_to "Edit Profile", edit_account_registration_path, class: "top-link" %> </li>    
+        <li class="top-li"> <%=link_to "Sign out", destroy_account_session_path, method: :delete, class: "top-link" %> </li>  
+      <% else %>
+        <li class="top-li"> <%=link_to "Sign up", new_account_registration_path, class: "top-link" %> </li>
+        <li class="top-li"> <%=link_to "Sign in", new_account_session_path, class: "top-link" %> </li>
+      <% end %>    
+   </ul>
+  </nav>
+</div>
+<main class="spacer">
+  <header class="devise-header">
+    <h1 class="sign-in-h1">Welcome to Amazone</h1>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="login-wrap">
+        <p class="sign-in-p">Please Sign In</p>
+        <div class="field">
+          <%= f.label :email, "Email Address:" %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email..." %>
+        </div>
+        <div class="field pwd">
+          <%= f.label :password, "Password:" %><br />
+          <%= f.password_field :password, autocomplete: "current-password", placeholder: "Password..." %>
+        </div>
+        <% if devise_mapping.rememberable? %>
+          <div class="field">
+            <span id="center_checkbox">
+            <%= f.check_box :remember_me %>
+            </span>
+            
+            <%= f.label :remember_me %>
+          </div>
+        <% end %>
+        <div class="account-links-container">
+          <%= render "devise/shared/links" %>
+        </div>
+      </div>    
+      <div class="actions">
+        <%= f.submit "Sign in", class: "purchase" %>
+      </div>
+    <% end %>
+  </header>
+  <%# <%= render "carts/contact" %>
+
+  <section id="contact" class="sign-ip-contact item-contact" id="login-spacer" >
+    <h2>FAQ</h2>       
+    <a href="#" id="qa">Click Here</a>
+
+    <h2>Contact</h2>
+    <p class="contactsummary">Want to buy something online for the first time in history? Just reach out!</p>
+    
+    <address>
+        <p class="phone">Phone:    <b>+1 (555) 111-5151</b></p>
+        <p class="email">Email:   <b>AmazoneIsLegit@mysite.com</b></p>
+    </address>
+  </section>
+
+
+</main>
+
+<%= render "carts/footer" %>
+
+
+
+

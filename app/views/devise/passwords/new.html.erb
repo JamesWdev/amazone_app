@@ -1,0 +1,54 @@
+<div class="nav-wrap">
+  <nav class="nav-container">   
+    <%= link_to request.referrer , id: "login-page" do%>
+      <%= image_tag "icon.png", class: "icon" %>
+    <% end %>
+    <%@carts_count = Cart.all.count %>
+    <ul class="top-navigation" id="login-nav">
+      <li class="top-li"><a class="top-link" href="#contact">Contact</a></li> 
+      <% if account_signed_in? %>
+        <li class="top-li"> <%=link_to "Edit Profile", edit_account_registration_path, class: "top-link" %> </li>    
+        <li class="top-li"> <%=link_to "Sign out", destroy_account_session_path, method: :delete, class: "top-link" %> </li>  
+      <% else %>
+        <li class="top-li"> <%=link_to "Sign up", new_account_registration_path, class: "top-link" %> </li>
+        <li class="top-li"> <%=link_to "Sign in", new_account_session_path, class: "top-link" %> </li>
+      <% end %>    
+   </ul>
+  </nav>
+</div>
+<main>
+  <header class="devise-header">
+  <h1 class="sign-in-h1">Forgot your password?</h1>
+    <div class="login-wrap">
+      <p class="sign-in-p">Reset Your Password</p> 
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <div class="field">
+          <%= f.label :email, "Enter your Account Email:" %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+        <div class="del-account-wrap">
+          <div class="actions">
+            <%= f.submit "Send Password Reset", class: "add-to-cart" %>
+          </div>
+        </div>
+      <% end %>
+
+      <%# render "devise/shared/links" %>
+    </div>
+  </header>
+
+    <section id="contact" class="sign-ip-contact item-contact" id="login-spacer" >
+    <h2>Contact</h2>
+    <p class="contactsummary">Want to buy something online for the first time in history? Just reach out!</p>
+    
+    <address>
+        <p class="phone">Phone:    <b>+1 (555) 111-5151</b></p>
+        <p class="email">Email:   <b>AmazoneIsLegit@mysite.com</b></p>
+    </address>
+  </section>
+
+</main>
+
+<%= render "carts/footer" %>

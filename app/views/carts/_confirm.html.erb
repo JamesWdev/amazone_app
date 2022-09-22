@@ -1,0 +1,7 @@
+  <% if flash.any? %>
+    <% flash.each do |type, msg| %>
+      <div>
+        <p class="confirm"><%= msg %></p>
+      </div>
+    <% end %>
+  <% end %>    

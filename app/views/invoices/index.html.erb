@@ -1,0 +1,39 @@
+<% @total = 0 %>
+<% @list = [] %> 
+<% @carts.each do |cart| %>
+  <% @list += [[cart.name, cart.quantity, (cart.quantity * cart.price)]] %>
+  <% @total += (cart.quantity * cart.price).round(2) %>
+<% end %>
+
+<% @invoice_list = "" %>
+<% @list.each do |name, quantity, price| %>
+  <% @x = " (#{name} x #{quantity}: #{number_to_currency(price)}) " %>
+  <% @invoice_list << @x %>
+<% end %>
+
+<% if Cart.all.count < 1 %>
+    <h3 class="zero">Zero Items in Cart</h3>          
+<% else %>
+  <%= form_with model: @invoice do |form| %>
+    <div>
+      <%= form.hidden_field :list, value: @invoice_list %>
+    </div>    
+    <div>
+      <%= form.hidden_field :total,  value: @total %>
+    </div>      
+    <div>
+      <%= form.submit "Purchase", class: "purchase"%>
+    </div>
+  <%end%>
+<%end%>
+
+
+
+    
+
+
+
+
+     
+     
+     

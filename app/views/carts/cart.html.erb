@@ -1,0 +1,85 @@
+<%= render "nav" %>
+
+<div class="cart-body">
+  <main class="cart">
+  
+    <div class="cart-wrap">
+      <h1 class = "cart-h1">Amazone Cart</h1>
+      <p class = "cart-p">Purchase Your Order</p>    
+      <div><%= image_tag("cart_icon.png", alt: "Cart icon.", class: "cart-icon") %></div> 
+    </div>
+
+    <section class="col-container cart-container">
+
+    <% @carts.each do |cart| %>
+      <% if Cart.all.count < 1 %>
+          <h3>Zero Items in Cart</h3>          
+      <% else %>
+        <div class="col item item-style">
+          <h2><%= cart.name %></h2>
+          <%= image_tag("#{cart.name}.jpg", alt: "Picture of #{cart.name.downcase}.") %>
+          <p>$<%= (cart.price * cart.quantity).round(2) %></p> 
+          <%= form_with model: @cart do |form| %>
+            <div>
+              <%= form.hidden_field :name, value: cart.name %>
+            </div>              
+            <div>  
+              <%= form.hidden_field :price, value: cart.price %>
+            </div>
+            <div> 
+              <%= form.hidden_field :quantity, value: cart.quantity %>
+            </div>
+            <div> 
+              <%= form.hidden_field :category, value: cart.category %>
+            </div>
+            <P>Quantity: <%= cart.quantity %> </p>
+            <div class="link-flex">
+              <%= link_to "Edit", edit_cart_path(cart), class: "edit" %>             
+              <%= link_to "Remove", cart_path(cart), class: "remove", data: {
+                      turbo_method: :delete,
+                      turbo_confirm: "Are you sure?"
+                    } %>
+            </div> 
+          <% end %>
+        </div>      
+      <% end %>
+    <% end %>
+
+    </section>
+    <%@price = 0%>
+    <% @carts.each do |cart| %>
+      <% @price += (cart.price * cart.quantity) %>    
+    <% end %>
+    <p class="tc">Total Cost: <%= number_to_currency(@price.round(2)) %></p>
+    
+    <%= render template: "invoices/index" %>
+        
+    <section class="order-list" id="orders">
+      <h2><b>Order History</b></h2>   
+      <ul>
+        <% @invoice_id = 0 %>
+        <% @invoices.each do |invoice| %>
+          <h3>-Purchased On <%= invoice.created_at.strftime("%m/%d/%Y") %>-</h3>
+          <li><b>Invoice ID <%= @invoice_id += 1 %>:</b> 
+            <%= invoice.list %>
+          </li>
+          <h3>Total Price: <%= number_to_currency(invoice.total.round(2)) %></h3>
+        <% end %>
+      </ul>
+    </section>
+
+    <hr>
+
+    <section id="contact" class="sign-ip-contact cart-contact">
+      <h2>Contact</h2>
+      <p class="contactsummary">Want to buy something online for the first time in history? Just reach out!</p>
+      
+      <address>
+        <p class="phone">Phone:    <b>+1 (555) 111-5151</b></p>
+        <p class="email">Email:   <b>AmazoneIsLegit@mysite.com</b></p>
+      </address> 
+    </section>
+  </main>
+</div>
+
+<%= render "footer" %>

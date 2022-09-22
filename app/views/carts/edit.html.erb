@@ -1,0 +1,50 @@
+<%= render "nav" %>
+
+<div class="cart-body">
+  <main class="cart">
+  
+    <div class="cart-wrap">
+      <h1 class = "cart-h1">Edit Cart</h1>
+      <%# <p class = "cart-p">Edit Your Order</p>  %>
+    </div>
+
+    <section class="col-container cart-container">
+      <div class="col item item-style">
+        <h2><%= @cart.name %></h2>
+        <%= image_tag("#{@cart.name}.jpg", alt: "Picture of #{@cart.name.downcase}.") %>
+        <p>$<%= @cart.price %></p> 
+        <%= form_with model: @cart do |form| %>
+          <div>
+            <%= form.hidden_field :name, value: @cart.name %>
+          </div>              
+          <div>  
+            <%= form.hidden_field :price, value: @cart.price %>
+          </div>
+          <div> 
+            <%= form.hidden_field :category, value: @cart.category %>
+          </div>
+          <div>
+            <%= form.label :quantity %><br>
+            <%= form.select :quantity, ["1", "2", "3", "4", "5"] %>
+          </div>                       
+          <div>
+            <%= form.submit "Update Cart", class: "add-to-cart" %>
+          </div>
+        <% end %>
+      </div> 
+   </section>   
+
+    <hr>
+
+    <section id="contact" class="sign-ip-contact cart-contact">
+      <h2>Contact</h2>
+      <p class="contactsummary">Want to buy something online for the first time in history? Just reach out!</p>      
+      <address>
+          <p class="phone">Phone:    <b>+1 (555) 111-5151</b></p>
+          <p class="email">Email:   <b>AmazoneIsLegit@mysite.com</b></p>
+      </address> 
+    </section>
+  </main>
+</div>
+
+<%= render "footer" %>

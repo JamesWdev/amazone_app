@@ -1,0 +1,44 @@
+<%= render "nav" %>
+
+<main>
+  <header class="item-header gear-header">
+    <h1 class="item-h1">Amazone Fitness</h1>
+    <p class="item-hp">Achieve With Amazone</p>
+    <%= render "sbar" %>
+    <%= render "confirm" %>
+  </header>
+
+  <section class="col-container item-container"> 
+    <% @items.each do |item| %>
+      <% if item.category == "gear" %>
+        <div class="col item item-style">
+          <h2><%= item.name %></h2>
+          <%= image_tag("#{item.name}.jpg", alt: "Picture of #{item.name.downcase}.") %>
+          <p>$<%= item.price %></p> 
+          <%= form_with model: @cart do |form| %>
+            <div>
+              <%= form.hidden_field :name, value: item.name %>
+            </div>              
+            <div>  
+              <%= form.hidden_field :price, value: item.price %>
+            </div>
+            <div> 
+              <%= form.hidden_field :quantity, value: item.quantity %>
+            </div>
+            <div> 
+              <%= form.hidden_field :category, value: item.category %>
+            </div>            
+            <div>
+              <%= form.submit "Add to Cart", class: "add-to-cart" %>
+            </div>
+          <% end %>
+        </div>      
+      <% end %>
+    <% end %>
+  </section>
+
+  <%= render "contact" %>
+
+</main>
+
+<%= render "footer" %>
