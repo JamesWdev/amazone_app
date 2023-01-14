@@ -30,7 +30,7 @@
 
 Download, open directory in terminal, and run application locally with "rails s".
 
-(If needed, run "rails db:create" then "rails db:migrate" followed by "rails db:seed" in the terminal)
+(To run locally, Step 1: enter "bundle install" in the terminal. Step 2: "rails db:create". Step 3: "rails db:migrate" followed by "rails db:seed")
 
 
 
